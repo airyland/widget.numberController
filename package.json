@@ -1,0 +1,23 @@
+{
+  "family": "seedit",
+  "name": "numberController",
+  "version": "0.0.1",
+  "description": "input number controller",
+  "homepage": "https://github.com/lizheng/widget.numberController",
+  "author": "airyland",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lizheng/widget.numberController.git"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [],
+  "licenses": "MIT",
+  "spm": {
+    "output": ["numberController.js"],
+    "alias": {},
+    "devAlias": {},
+    "engines": {}
+  }
+}
