@@ -1,22 +1,24 @@
 define("seedit/numberController/0.0.1/numberController-debug", [ "$-debug" ], function(require, exports, module) {
     var $ = require("$-debug");
-    var defaults = {
-        plusEle: null,
-        minusEle: null,
-        numberEle: null,
-        minusDisabledClass: "minus-disabled",
-        plusDisabledClass: "plus-disabled",
-        minNumber: 0,
-        step: 1,
-        onchange: $.noop
-    };
     var numberController = function(option) {
         var _this = this;
+        var defaults = {
+            plusEle: null,
+            minusEle: null,
+            numberEle: null,
+            minusDisabledClass: "minus-disabled",
+            plusDisabledClass: "plus-disabled",
+            minNumber: 0,
+            step: 1,
+            onchange: $.noop
+        };
         $.extend(defaults, option);
-        defaults = defaults;
-        if (!option.numberEle) throw "shit! No number element specified";
+        this.defaults = function() {
+            return defaults;
+        }();
+        if (!_this.defaults.numberEle) throw "shit! No number element specified";
         $.each([ "$numberEle", "$plusEle", "$minusEle" ], function(index, value) {
-            _this[value] = $(option[value.slice(1)]).eq(0);
+            _this[value] = $(_this.defaults[value.slice(1)]).eq(0);
         });
         return this.init(option);
     };
@@ -24,10 +26,10 @@ define("seedit/numberController/0.0.1/numberController-debug", [ "$-debug" ], fu
         init: function(option) {
             var _this = this;
             _this.$minusEle.click(function() {
-                _this.minus(defaults.step);
+                _this.minus(_this.defaults.step);
             });
             _this.$plusEle.click(function() {
-                _this.plus(defaults.step);
+                _this.plus(_this.defaults.step);
             });
             _this.minus(0);
             _this.plus(0);
@@ -41,10 +43,10 @@ define("seedit/numberController/0.0.1/numberController-debug", [ "$-debug" ], fu
             if (step !== 0) {
                 this.emit("change");
             }
-            if ($.isNumeric(defaults.minNumber)) {
-                if (defaults.minNumber === this.val()) {
+            if ($.isNumeric(_this.defaults.minNumber)) {
+                if (_this.defaults.minNumber === this.val()) {
                     setTimeout(function() {
-                        _this.$minusEle.prop("disabled", true).addClass(defaults.minusDisabledClass);
+                        _this.$minusEle.prop("disabled", true).addClass(_this.defaults.minusDisabledClass);
                     }, 0);
                     return;
                 }
@@ -58,35 +60,34 @@ define("seedit/numberController/0.0.1/numberController-debug", [ "$-debug" ], fu
             if (step !== 0) {
                 this.emit("change");
             }
-            if ($.isNumeric(defaults.maxNumber)) {
-                if (defaults.maxNumber === this.val()) {
+            if ($.isNumeric(_this.defaults.maxNumber)) {
+                if (_this.defaults.maxNumber === this.val()) {
                     setTimeout(function() {
-                        _this.$plusEle.prop("disabled", true).addClass(defaults.plusDisabledClass);
+                        _this.$plusEle.prop("disabled", true).addClass(_this.defaults.plusDisabledClass);
                     }, 0);
                 }
             }
         },
-        checkValid: function(number) {},
         // getter and setter
         val: function(number) {
             var _this = this;
             if ($.isNumeric(number)) {
                 // check min and max
-                if ($.isNumeric(defaults.minNumber)) {
-                    if (number > defaults.minNumber) {
+                if ($.isNumeric(_this.defaults.minNumber)) {
+                    if (number > _this.defaults.minNumber) {
                         this.$numberEle.val(number);
                         if (_this.$plusEle.is(":disabled")) {
-                            _this.$plusEle.prop("disabled", false).removeClass(defaults.plusDisabledClass);
+                            _this.$plusEle.prop("disabled", false).removeClass(_this.defaults.plusDisabledClass);
                         }
                     } else {
                         this.$minusEle.prop("disabled", true);
                     }
                 }
-                if ($.isNumeric(defaults.maxNumber)) {
-                    if (number < defaults.maxNumber) {
+                if ($.isNumeric(_this.defaults.maxNumber)) {
+                    if (number < _this.defaults.maxNumber) {
                         this.$numberEle.val(number);
                         if (_this.$minusEle.is(":disabled")) {
-                            _this.$minusEle.prop("disabled", false).removeClass(defaults.minusDisabledClass);
+                            _this.$minusEle.prop("disabled", false).removeClass(_this.defaults.minusDisabledClass);
                         }
                     } else {
                         this.$plusEle.prop("disabled", true);
@@ -99,7 +100,7 @@ define("seedit/numberController/0.0.1/numberController-debug", [ "$-debug" ], fu
         },
         emit: function(event, value, callback) {
             if (event === "change") {
-                defaults.onchange && defaults.onchange(this.val());
+                this.defaults.onchange && this.defaults.onchange(this.val());
             }
         },
         on: function(event, value, callback) {}

@@ -20,10 +20,7 @@ seajs.use('numberController', function(numberController) {
         minusEle: '.minus',
         plusEle: '.plus',
         minNumber: 0,
-        maxNumber: 5,
-        onchange: function(value) {
-            console.log('event change1', value)
-        }
+        maxNumber: 5
     });
 });
 ````
