@@ -3,11 +3,11 @@
   "name": "numberController",
   "version": "0.0.1",
   "description": "input number controller",
-  "homepage": "https://github.com/lizheng/widget.numberController",
+  "homepage": "https://github.com/airyland/widget.numberController",
   "author": "airyland",
   "repository": {
     "type": "git",
-    "url": "git://github.com/lizheng/widget.numberController.git"
+    "url": "git://github.com/airyland/widget.numberController.git"
   },
   "bugs": {
     "url": ""
