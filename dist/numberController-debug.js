@@ -1,4 +1,5 @@
 define("seedit/numberController/0.0.1/numberController-debug", [ "$-debug" ], function(require, exports, module) {
+    //@todo bash bind
     var $ = require("$-debug");
     var numberController = function(option) {
         var _this = this;
@@ -16,7 +17,7 @@ define("seedit/numberController/0.0.1/numberController-debug", [ "$-debug" ], fu
         this.defaults = function() {
             return defaults;
         }();
-        if (!_this.defaults.numberEle) throw "shit! No number element specified";
+        if (!_this.defaults.minusEle && !_this.defaults.numberEle) throw "shit! No number element specified";
         $.each([ "$numberEle", "$plusEle", "$minusEle" ], function(index, value) {
             _this[value] = $(_this.defaults[value.slice(1)]).eq(0);
         });
