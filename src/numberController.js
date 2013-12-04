@@ -1,4 +1,5 @@
 define(function(require, exports, module) {
+    //@todo bash bind
     var $ = require('$');
     var numberController = function(option) {
         var _this = this;
@@ -16,7 +17,7 @@ define(function(require, exports, module) {
         this.defaults = (function() {
             return defaults;
         })();
-        if (!_this.defaults.numberEle) throw ('shit! No number element specified');
+        if (!_this.defaults.minusEle && !_this.defaults.numberEle) throw ('shit! No number element specified');
         $.each(['$numberEle', '$plusEle', '$minusEle'], function(index, value) {
             _this[value] = $(_this.defaults[value.slice(1)]).eq(0);
         });
