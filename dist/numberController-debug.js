@@ -51,9 +51,13 @@ define("seedit/numberController/0.0.1/numberController-debug", [], function(requ
             check: function() {
                 if (this.$numberEle.val() * 1 === this.defaults.minNumber) {
                     this.$minusEle.addClass(this.defaults.minusDisabledClass);
+                } else {
+                    this.$minusEle.removeClass(this.defaults.minusDisabledClass);
                 }
                 if (this.$numberEle.val() * 1 === this.defaults.maxNumber) {
                     this.$plusEle.addClass(this.defaults.plusDisabledClass);
+                } else {
+                    this.$plusEle.removeClass(this.defaults.plusDisabledClass);
                 }
             },
             minus: function(step) {
